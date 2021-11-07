@@ -1,0 +1,14 @@
+module "appgw-ingress-k8s-cluster" {
+  source                              = "Azure/appgw-ingress-k8s-cluster/azurerm" 
+  version                             = "0.1.0"
+  resource_group_name                 = "myapp"
+  location                            = "canadacentral"
+  aks_service_principal_app_id        = "<App ID of the service principal>"
+  aks_service_principal_client_secret = "<Client secret of the service principal>"
+  aks_service_principal_object_id     = "<Object ID of the service principal>"
+
+  tags = {
+    environment = "dev"
+    costcenter  = "it"
+  }
+}
