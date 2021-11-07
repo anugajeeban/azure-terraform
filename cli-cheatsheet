@@ -67,13 +67,34 @@ $ terraform state pull > terraform.tfstate
 //Push State in a Remote Backend storage//
 $ terraform state push
 
+//How to Tell to Terraform You Moved a Resource in A Module?//
+$ terraform state mv aws_iam_role.role1 module.mymodule
 
+//How to Import Existing Resource in Terraform? //
+$ terraform import aws_iam_policy.elastic_post
+arn:aws:iam::123456789:policy/elastic_post
 
+//Tools - jq//
+//for linux//
+$ sudo apt-get install jq
+or
+$ yum install jq
 
+//for OS X://
+$ brew install jq
 
+//extract the value that we want in order to use it in a script with jq //
+$ terraform output -json
+{
+    "elastic_endpoint": {
+        "sensitive": false,
+        "type": "string",
+        "value": "vpc-toto-12fgfd4d5f4ds5fngetwe4.eu-central-1.es.amazonaws.com"
+    }
+}
 
-
-
+$ terraform output -json | jq '.elastic_endpoint.value'
+"vpc-toto-12fgfd4d5f4ds5fngetwe4.eu-central-1.es.amazonaws.com"
 
 
 
